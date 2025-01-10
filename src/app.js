@@ -12,6 +12,7 @@ app.use(express.json());
 //     res.send("<center><h1>Welcome to Server's Home Page</h1></center>");
 // })
 
+
 // POST API
 app.post("/students", (req, res) => {
     console.log(req.body);
@@ -32,20 +33,45 @@ app.post("/students", (req, res) => {
     // res.send("Hello from the server by Shahbaz Talhab Patel.");
 });
 
+
 // GET API (Get all students from database)
 app.get("/students", async (req, res) => {
     // res.send("Get all students data");
 
     try {
-        const students = await Student.find();
+        const studentsData = await Student.find();
 
-        res.status(200).send(students);
+        res.status(200).send(studentsData);
     } catch(err) {
         console.log("Error: ", err);
 
         res.send(e);
     }
 })
+
+
+// Get API (Get specific student's data from database using "_id")
+app.get("/students/:id", async (req, res) => {
+    // res.send("Get API to get specific student data..");
+
+    try {
+        const _id = req.params.id;
+        console.log("Searched Student Id: "+_id);
+
+        const studentData = await Student.findById({_id});
+
+        if(!studentData) {
+            return res.status(404).send();
+        } else {
+            res.status(200).send(studentData);
+        }
+    } catch(err) {
+        console.log("Error: ",err);
+
+        res.status(500).send(err);
+    }
+})
+
 
 app.listen(port, (err) => {
     if (!err) {
