@@ -8,10 +8,11 @@ const port = process.env.PORT || 4000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send("<center><h1>Welcome to Server's Home Page</h1></center>");
-})
+// app.get("/", (req, res) => {
+//     res.send("<center><h1>Welcome to Server's Home Page</h1></center>");
+// })
 
+// POST API
 app.post("/students", (req, res) => {
     console.log(req.body);
     const user = new Student(req.body);
@@ -30,6 +31,21 @@ app.post("/students", (req, res) => {
 
     // res.send("Hello from the server by Shahbaz Talhab Patel.");
 });
+
+// GET API (Get all students from database)
+app.get("/students", async (req, res) => {
+    // res.send("Get all students data");
+
+    try {
+        const students = await Student.find();
+
+        res.status(200).send(students);
+    } catch(err) {
+        console.log("Error: ", err);
+
+        res.send(e);
+    }
+})
 
 app.listen(port, (err) => {
     if (!err) {
