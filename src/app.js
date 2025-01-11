@@ -13,7 +13,7 @@ app.use(express.json());
 // })
 
 
-// POST API (to create new document in collection "students")
+// POST API (Create new document in collection "students")
 app.post("/students", (req, res) => {
     console.log(req.body);
     const user = new Student(req.body);
@@ -34,7 +34,7 @@ app.post("/students", (req, res) => {
 });
 
 
-// GET API (Get all students from database)
+// GET API (Fetch all students from database)
 app.get("/students", async (req, res) => {
     // res.send("Get all students data");
 
@@ -50,7 +50,7 @@ app.get("/students", async (req, res) => {
 })
 
 
-// Get API (Get specific student's data from database using "_id")
+// Get API (Fetch specific student's data from database using "_id")
 app.get("/students/:id", async (req, res) => {
     // res.send("Get API to get specific student data..");
 
@@ -73,7 +73,7 @@ app.get("/students/:id", async (req, res) => {
 });
 
 
-// Patch API (update the student by its id)
+// Patch API (Update the student by its id)
 app.patch("/students/:id", async (req, res) => {
     // res.send("Patch API to update student detail by its _id");
 
