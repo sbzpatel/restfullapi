@@ -13,7 +13,7 @@ app.use(express.json());
 // })
 
 
-// POST API
+// POST API (to create new document in collection "students")
 app.post("/students", (req, res) => {
     console.log(req.body);
     const user = new Student(req.body);
